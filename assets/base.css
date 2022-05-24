@@ -1,3 +1,19 @@
+/* FONT CUSTOM */
+
+@font-face{
+  font-family: Oskari;
+  src: url(https://cdn.shopify.com/s/files/1/0643/7276/8983/files/oskari-g2-regular.otf?v=1653418656);
+}
+
+@font-face{
+  font-family: Gotham;
+  src:url(https://cdn.shopify.com/s/files/1/0643/7276/8983/files/GothamBook.ttf?v=1653419854)
+}
+
+*{
+  font-family: Oskari;
+}
+
 /* Color custom properties */
 
 :root,
