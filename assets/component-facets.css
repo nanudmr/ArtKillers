@@ -90,10 +90,9 @@
 .facet-filters__field .select__select,
 .mobile-facets__sort .select__select {
   border-radius: 0;
-  min-width: auto;
   min-height: auto;
   transition: none;
-}
+}w
 
 .facet-filters button {
   margin-left: 2.5rem;
