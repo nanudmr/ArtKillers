@@ -10,8 +10,13 @@
   src:url(https://cdn.shopify.com/s/files/1/0643/7276/8983/files/GothamBook.ttf?v=1653419854)
 }
 
-*{
-  font-family: Oskari;
+* {
+  font-family: Oskari !important;
+}
+
+#SortBy option {
+  color: #ECECEC;
+  background-color: #121012;
 }
 
 /* Color custom properties */
