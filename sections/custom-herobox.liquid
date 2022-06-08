@@ -1,0 +1,59 @@
+{{ 'custom-herobox.css' | asset_url | stylesheet_tag }}
+
+<div class="herobox">
+
+    <div class="slider">
+        <div class="slide active"><img src="{{section.settings.first_img | img_url: '2048x'}}" alt=""></div>
+        <div class="slide"><img src="{{section.settings.second_img | img_url: '2048x'}}" alt=""></div>
+        <div class="slide"><img src="{{section.settings.third_img | img_url: '2048x'}}" alt=""></div>
+        <div class="slide"><img src="{{section.settings.fourth_img | img_url: '2048x'}}" alt=""></div>
+    </div>
+
+</div>
+
+
+{%- style -%}
+<!-- 
+.herobox .leftImg{
+  background-image: url({{ section.settings.left_img | img_url: '2048x'}});
+} -->
+
+{%- endstyle -%}
+
+
+{{ 'custom-herobox.js' | asset_url | script_tag }}
+
+
+{% schema %}
+{
+   "name": "Custom Herobox",
+   "settings": [
+      {
+        "type": "image_picker",
+        "id": "first_img",
+        "label": "Primera imagen"
+      },
+      {
+        "type": "image_picker",
+        "id": "second_img",
+        "label": "Segunda imagen"
+      },
+      {
+        "type": "image_picker",
+        "id": "third_img",
+        "label": "Tercera imagen"
+      },
+      {
+        "type": "image_picker",
+        "id": "fourth_img",
+        "label": "Cuarta imagen"
+      }
+  ],
+  "presets": [
+    {
+        "name": "Custom Herobox",
+        "category": "Custom Herobox"
+    }
+  ]
+}
+{% endschema %}
