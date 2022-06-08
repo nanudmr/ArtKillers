@@ -1,20 +1,14 @@
 .herobox{
     width: 100%;
     height: 530px;
+    overflow: hidden;
 }
 
 .herobox .slider{
     display: flex;
-}
-
-.herobox .slider .slide{
-    display: none;
-}
-
-.herobox .slider .slide.active{
-    display: block;
+    transition: all 0.5s ease-in-out;
 }
 
 .herobox .slider img{
-    width: 100%;
+    width: 100vw;
 }
