@@ -15,3 +15,7 @@
 .herobox .slide img{
     width: 100vw;
 }
+
+.grabbing{
+    overflow-y: hidden;
+}
