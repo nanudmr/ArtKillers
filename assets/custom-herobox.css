@@ -4,11 +4,14 @@
     overflow: hidden;
 }
 
-.herobox .slider{
-    display: flex;
-    transition: all 0.5s ease-in-out;
+.herobox .slider-container{
+    display: inline-flex;
+    overflow: hidden;
+    transform: translateX(0);
+    transition: all 0.3s ease-out;
+    cursor: grab;
 }
 
-.herobox .slider img{
+.herobox .slide img{
     width: 100vw;
 }

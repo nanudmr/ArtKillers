@@ -1,52 +1,98 @@
-const slides = document.querySelectorAll(".slide")
-let slidePosition = 0
-const totalSlide = slides.length*-100
-const slider = document.querySelector(".slider")
-let intervalTime = 4000
+const slider = document.querySelector(".slider-container")
+const slides = Array.from(document.querySelectorAll(".slide")) 
 
-function carousel(){
-    if(slidePosition === totalSlide +100){
-        slidePosition = 0
-        slider.style.transform = `translate(${slidePosition}vw, 0)`
-    } else {
-        slidePosition-=100
-        slider.style.transform = `translate(${slidePosition}vw, 0)`
+let isDragging = false
+let startPosition = 0
+let currentTranslate = 0
+let previousTranslate = 0
+let animationID = 0
+let currentIndex = 0
+
+slides.forEach((slide, index) => {
+
+    // Prevent Image Drag
+    const slideImg = slide.querySelector("img")
+    slideImg.addEventListener("dragstart", (e)=>{
+        e.preventDefault()
+    })
+
+    // Touch Events
+    slide.addEventListener("touchstart", touchStart(index))
+    slide.addEventListener("touchend", touchEnd)
+    slide.addEventListener("touchmove", touchMove)
+
+
+    // Mouse Events
+    slide.addEventListener("mousedown", touchStart(index))
+    slide.addEventListener("mouseup", touchEnd)
+    slide.addEventListener("mouseleave", touchEnd)
+    slide.addEventListener("mousemove", touchMove)
+
+
+})
+
+// Disable Context Menu
+window.oncontextmenu = function(e){
+    e.preventDefault()
+    e.stopPropagation()
+    return false
+}
+
+function getPositionX(event) {
+    return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX
+}
+
+function touchStart(index){
+    return function(event){
+        currentIndex = index
+        isDragging = true
+        startPosition = getPositionX(event)
+
+        animationID = requestAnimationFrame(animation)
+
+        slider.classList.add("grabbing")
     }
 }
 
-// setInterval(carousel, intervalTime)
+function touchEnd(){
+    isDragging = false
+    cancelAnimationFrame(animationID)
+    const movedBy = currentTranslate - previousTranslate
 
-
-//TOUCH FUNCTION
-let touchstartX = 0
-let touchendX = 0
-    
-function checkDirection() {
-  if (touchendX < touchstartX) {
-    //   console.log('swiped left!')
-      if(slidePosition === -300){
-          slidePosition+=300
-      } else{
-        slidePosition-= 100
-      }
-      slider.style.transform = `translate(${slidePosition}vw, 0)`
+    if(movedBy < -100 && currentIndex < slides.length -1){
+        currentIndex += 1
     }
-  if (touchendX > touchstartX) {
-    //   console.log('swiped right!')
-      if(slidePosition === 0){
-          slidePosition-=300
-      } else{
-        slidePosition+=100
-      }
-      slider.style.transform = `translate(${slidePosition}vw, 0)`
+
+    if(movedBy > 100 && currentIndex > 0){
+        currentIndex -= 1
+    }
+
+    setPositionByIndex()
+
+    slider.classList.remove("grabbing")
+}
+
+function touchMove(event){
+    if(isDragging){
+        const currentPosition = getPositionX(event)
+        currentTranslate = previousTranslate + currentPosition - startPosition
     }
 }
 
-document.addEventListener('touchstart', e => {
-  touchstartX = e.changedTouches[0].screenX
-})
 
-document.addEventListener('touchend', e => {
-  touchendX = e.changedTouches[0].screenX
-  checkDirection()
-})
+function animation(){
+    setSliderPosition()
+    if(isDragging){
+        requestAnimationFrame(animation)
+    }
+}
+
+function setSliderPosition(){
+    slider.style.transform = `translateX(${currentTranslate}px)`
+}
+
+function setPositionByIndex(){
+    currentTranslate = currentIndex * -window.innerWidth
+    previousTranslate = currentTranslate
+    setSliderPosition()
+}
