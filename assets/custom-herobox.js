@@ -1,5 +1,8 @@
 const slider = document.querySelector(".slider-container")
 const slides = Array.from(document.querySelectorAll(".slide")) 
+const body = document.querySelector("body")
+
+console.log(body)
 
 let isDragging = false
 let startPosition = 0
@@ -50,7 +53,7 @@ function touchStart(index){
 
         animationID = requestAnimationFrame(animation)
 
-        slider.classList.add("grabbing")
+        body.classList.add("grabbing")
     }
 }
 
@@ -69,7 +72,7 @@ function touchEnd(){
 
     setPositionByIndex()
 
-    slider.classList.remove("grabbing")
+    body.classList.remove("grabbing")
 }
 
 function touchMove(event){
