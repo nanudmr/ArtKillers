@@ -59,11 +59,11 @@ function touchEnd(){
     cancelAnimationFrame(animationID)
     const movedBy = currentTranslate - previousTranslate
 
-    if(movedBy < -100 && currentIndex < slides.length -1){
+    if(movedBy < -60 && currentIndex < slides.length -1){
         currentIndex += 1
     }
 
-    if(movedBy > 100 && currentIndex > 0){
+    if(movedBy > 60 && currentIndex > 0){
         currentIndex -= 1
     }
 
