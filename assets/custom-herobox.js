@@ -53,7 +53,7 @@ function touchStart(index){
 
         animationID = requestAnimationFrame(animation)
 
-        body.classList.add("grabbing")
+        e.preventDefault()
     }
 }
 
@@ -72,7 +72,7 @@ function touchEnd(){
 
     setPositionByIndex()
 
-    body.classList.remove("grabbing")
+    // body.classList.remove("grabbing")
 }
 
 function touchMove(event){
